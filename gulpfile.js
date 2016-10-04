@@ -5,6 +5,7 @@ var header = require('gulp-header');
 var cleanCSS = require('gulp-clean-css');
 var rename = require("gulp-rename");
 var uglify = require('gulp-uglify');
+var nunjucks = require('gulp-nunjucks');
 var pkg = require('./package.json');
 
 // Set the banner content
@@ -65,9 +66,6 @@ gulp.task('copy', function() {
     gulp.src(['bower_components/bootstrap/dist/**/*', '!**/npm.js', '!**/bootstrap-theme.*', '!**/*.map'])
         .pipe(gulp.dest('vendor/bootstrap'))
 
-    gulp.src(['bower_components/bootstrap-social/*.css', 'bower_components/bootstrap-social/*.less', 'bower_components/bootstrap-social/*.scss'])
-        .pipe(gulp.dest('vendor/bootstrap-social'))
-
     gulp.src(['bower_components/datatables/media/**/*'])
         .pipe(gulp.dest('vendor/datatables'))
 
@@ -77,12 +75,6 @@ gulp.task('copy', function() {
     gulp.src(['bower_components/datatables-responsive/css/*', 'bower_components/datatables-responsive/js/*'])
         .pipe(gulp.dest('vendor/datatables-responsive'))
 
-    gulp.src(['bower_components/flot/*.js'])
-        .pipe(gulp.dest('vendor/flot'))
-
-    gulp.src(['bower_components/flot.tooltip/js/*.js'])
-        .pipe(gulp.dest('vendor/flot-tooltip'))
-
     gulp.src(['bower_components/font-awesome/**/*', '!bower_components/font-awesome/*.json', '!bower_components/font-awesome/.*'])
         .pipe(gulp.dest('vendor/font-awesome'))
 
@@ -91,13 +83,6 @@ gulp.task('copy', function() {
 
     gulp.src(['bower_components/metisMenu/dist/*'])
         .pipe(gulp.dest('vendor/metisMenu'))
-
-    gulp.src(['bower_components/morrisjs/*.js', 'bower_components/morrisjs/*.css', '!bower_components/morrisjs/Gruntfile.js'])
-        .pipe(gulp.dest('vendor/morrisjs'))
-
-    gulp.src(['bower_components/raphael/raphael.js', 'bower_components/raphael/raphael.min.js'])
-        .pipe(gulp.dest('vendor/raphael'))
-
 })
 
 // Run everything
