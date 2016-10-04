@@ -97,11 +97,20 @@ gulp.task('browserSync', function() {
     })
 })
 
+gulp.task('nunjucks', () => {
+    delete require.cache[require.resolve('./context.json')]
+    gulp.src(['templates/*.html', '!templates/layout*.html'])
+        .pipe(nunjucks.compile(require('./context.json')))
+        .pipe(gulp.dest('pages'))
+  }
+);
+
 // Dev task with browserSync
-gulp.task('dev', ['browserSync', 'less', 'minify-css', 'js', 'minify-js'], function() {
+gulp.task('dev', ['browserSync', 'less', 'minify-css', 'js', 'minify-js', 'nunjucks'], function() {
     gulp.watch('less/*.less', ['less']);
     gulp.watch('dist/css/*.css', ['minify-css']);
     gulp.watch('js/*.js', ['minify-js']);
+    gulp.watch(['templates/**/*.html', 'context.json'], ['nunjucks']);
     // Reloads the browser whenever HTML or JS files change
     gulp.watch('pages/*.html', browserSync.reload);
     gulp.watch('dist/js/*.js', browserSync.reload);
